@@ -5,11 +5,11 @@
 .*.cmd
 *.pkg.tar.*
 __pycache__/
-virtual-camera/build/
-packaging/libcamera/src/
-packaging/libcamera/pkg/
-packaging/libcamera/libcamera/
-packaging/libcamera/build/
+camera/virtual-camera/build/
+camera/packaging/libcamera/src/
+camera/packaging/libcamera/pkg/
+camera/packaging/libcamera/libcamera/
+camera/packaging/libcamera/build/
 *.log
 core
 core.*

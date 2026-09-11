@@ -1,17 +1,14 @@
-# Surface Pro 5 camera fixes
+# Surface Pro 5 on Linux
 
-Reproducible patches and an automatically activated virtual webcam for a Surface Pro 5 running Omarchy and the linux-surface kernel. This records a working local setup, including experiments that did not completely fix the underlying drivers.
+Setup notes, reproducible fixes and local tooling for running Linux and Omarchy on a Microsoft Surface Pro 5 with the linux-surface kernel.
 
-**Working browser path:** front camera → fixed 1280×720 capture → V4L2 loopback → PipeWire/Firefox. Selecting **Surface Front 720p** starts capture automatically, including permission previews. The sensor stops three seconds after the last viewer disconnects.
+This repository is organized by hardware subsystem. Each area records the tested configuration, upstream provenance, installation and rollback procedures, and known limitations. Camera support is the first documented subsystem; additional areas can be added as they are investigated and verified.
 
-| Directory | Contents |
+| Area | Contents |
 | --- | --- |
-| [virtual-camera/](virtual-camera/README.md) | Demand watcher, frame bridge, user services, reversible installer and configuration |
-| [patches/linux/](patches/linux/README.md) | DW9719 binding fix, OV8865 mode/PM patches, optional orientation, experimental OV5693 patch |
-| [packaging/libcamera/](packaging/libcamera/README.md) | Arch 0.7.2-4.1 package recipe and IPU3 crop-underflow workaround |
-| [docs/status.md](docs/status.md) | Hardware, exact tested versions, verification and limitations |
-| [docs/troubleshooting.md](docs/troubleshooting.md) | Diagnosis and recovery |
+| [Hardware and environment](docs/hardware.md) | Device identity and baseline software |
+| [Camera](camera/README.md) | Sensor/kernel patches, patched libcamera packaging, automatic virtual webcam and troubleshooting |
 
-Start with the [status](docs/status.md), then the [virtual-camera instructions](virtual-camera/README.md) if native front capture at 1280×720 already works. Otherwise apply the relevant kernel/libcamera fixes first. Install only the changes your system needs; the experimental front patch is not a general fix for black frames.
+The current camera setup provides a working front webcam in Firefox through a fixed 720p capture pipeline that starts when an application requests video. See the [camera status](camera/docs/status.md) for which fixes are confirmed, experimental or optional.
 
-No prebuilt modules, packages, firmware, core dumps or machine logs are distributed. Nothing in this repository uploads or records camera frames. Source provenance and licensing are recorded with each component in [LICENSES.md](LICENSES.md).
+Only source, configuration and documentation are tracked. Prebuilt modules, packages, firmware, core dumps and private machine logs are excluded. Components retain their own upstream licenses; see [licensing and attribution](LICENSES.md).

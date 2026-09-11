@@ -15,7 +15,7 @@ Changes: package release 4.1, crop guard, test discovery uses Meson's last field
 Use a matching Arch environment or clean chroot, with `base-devel` installed. These are historical version-pinned packages; review dependencies before installing on a newer system.
 
 ```bash
-cd packaging/libcamera
+cd camera/packaging/libcamera
 makepkg --verifysource
 makepkg -s
 sudo pacman -U ./libcamera-0.7.2-4.1-x86_64.pkg.tar.zst ./libcamera-ipa-0.7.2-4.1-x86_64.pkg.tar.zst ./libcamera-tools-0.7.2-4.1-x86_64.pkg.tar.zst ./gst-plugin-libcamera-0.7.2-4.1-x86_64.pkg.tar.zst

@@ -16,7 +16,7 @@ If using this repository's libcamera package, install its matching four split pa
 
 ## Install
 
-Run from the repository root. Build and test first:
+Run from the camera directory (`cd camera`). Build and test first:
 
 ```bash
 make -C virtual-camera check

@@ -13,7 +13,7 @@ Patches 1, 2 and 4 touch different drivers; 3 depends on 2. Kernel changes retai
 
 ## Reproduce
 
-From the repository root, choose an empty output path outside the checkout:
+From the camera directory (`cd camera`), choose an empty output path outside the checkout:
 
 ```bash
 ./patches/linux/build.sh /tmp/surface5-kernel-build --orientation
