@@ -8,5 +8,8 @@ Currently documented:
 
 - [Camera hardware, software versions and validation](../camera/docs/status.md)
 - [Camera installation and fixes](../camera/README.md)
+- [On-screen keyboard plugin and current configuration](../on-screen-keyboard/README.md)
+
+During keyboard setup documentation, the installed desktop package was confirmed as **Omarchy 4.0.3-1** (2026-09-11).
 
 Kernel override modules must be rebuilt or reassessed when the kernel changes. Always retain component-specific rollback instructions and previous working packages before applying local fixes.
