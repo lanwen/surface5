@@ -1,0 +1,3 @@
+# Preserve upstream patch context, signatures, and license text verbatim.
+*.patch -whitespace
+LICENSES/*.txt -whitespace

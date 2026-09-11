@@ -1,0 +1,10 @@
+[Unit]
+Description=Surface front camera at 720p for video calls
+After=pipewire.service wireplumber.service
+PartOf=surface-camera-demand.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 %h/.local/lib/surface5-camera/stream-demand.py
+KillSignal=SIGINT
+TimeoutStopSec=10

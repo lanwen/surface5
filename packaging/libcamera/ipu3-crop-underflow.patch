@@ -1,0 +1,13 @@
+--- a/src/libcamera/pipeline/ipu3/imgu.cpp
++++ b/src/libcamera/pipeline/ipu3/imgu.cpp
+@@ -108,7 +108,9 @@
+ void calculateBDSHeight(ImgUDevice::Pipe *pipe, const Size &iif, const Size &gdc,
+ 			unsigned int bdsWidth, float bdsSF)
+ {
+-	unsigned int minIFHeight = iif.height - ImgUDevice::kIFMaxCropHeight;
++	/* Keep crop bounds ordered, including for small intermediate heights. */
++	unsigned int minIFHeight = iif.height > ImgUDevice::kIFMaxCropHeight
++		? iif.height - ImgUDevice::kIFMaxCropHeight : 1;
+ 	unsigned int minBDSHeight = gdc.height + ImgUDevice::kFilterHeight * 2;
+ 	unsigned int ifHeight;
+ 	float bdsHeight;

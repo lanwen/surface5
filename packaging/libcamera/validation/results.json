@@ -1,0 +1,78 @@
+[
+  {
+    "binary": "original",
+    "args": [],
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "/usr/include/c++/16/bits/stl_algo.h:3616: constexpr const _Tp& std::clamp(const _Tp&, const _Tp&, const _Tp&) [with _Tp = float]: Assertion '!(__hi < __lo)' failed."
+  },
+  {
+    "binary": "patched",
+    "args": [],
+    "returncode": 0,
+    "stdout": "1296x756 864x504 832x480 1.5",
+    "stderr": ""
+  },
+  {
+    "binary": "original",
+    "args": [
+      "640",
+      "480"
+    ],
+    "returncode": 0,
+    "stdout": "1296x972 768x576 640x480 1.6875",
+    "stderr": ""
+  },
+  {
+    "binary": "patched",
+    "args": [
+      "640",
+      "480"
+    ],
+    "returncode": 0,
+    "stdout": "1296x972 768x576 640x480 1.6875",
+    "stderr": ""
+  },
+  {
+    "binary": "original",
+    "args": [
+      "1280",
+      "720"
+    ],
+    "returncode": 0,
+    "stdout": "1296x732 1296x732 1280x720 1",
+    "stderr": ""
+  },
+  {
+    "binary": "patched",
+    "args": [
+      "1280",
+      "720"
+    ],
+    "returncode": 0,
+    "stdout": "1296x732 1296x732 1280x720 1",
+    "stderr": ""
+  },
+  {
+    "binary": "original",
+    "args": [
+      "832",
+      "480",
+      "boundaries"
+    ],
+    "returncode": -6,
+    "stdout": "",
+    "stderr": "/usr/include/c++/16/bits/stl_algo.h:3616: constexpr const _Tp& std::clamp(const _Tp&, const _Tp&, const _Tp&) [with _Tp = float]: Assertion '!(__hi < __lo)' failed."
+  },
+  {
+    "binary": "patched",
+    "args": [
+      "832",
+      "480",
+      "boundaries"
+    ],
+    "returncode": 0,
+    "stdout": "boundary cases passed",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,15 @@
+*.ko
+*.o
+*.mod
+*.mod.c
+.*.cmd
+*.pkg.tar.*
+__pycache__/
+virtual-camera/build/
+packaging/libcamera/src/
+packaging/libcamera/pkg/
+packaging/libcamera/libcamera/
+packaging/libcamera/build/
+*.log
+core
+core.*

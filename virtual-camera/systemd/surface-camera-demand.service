@@ -1,0 +1,15 @@
+[Unit]
+Description=Start Surface camera only when a viewer requests video
+After=pipewire.service wireplumber.service
+
+[Service]
+Type=simple
+ExecStartPre=/usr/bin/v4l2-ctl -d /dev/video42 --set-fmt-video-out=width=1280,height=720,pixelformat=YUYV
+ExecStartPre=/usr/bin/v4l2-ctl -d /dev/video42 --set-ctrl=keep_format=1
+ExecStart=/usr/bin/python3 %h/.local/lib/surface5-camera/sink.py
+ExecStopPost=/usr/bin/systemctl --user stop surface-virtual-camera.service
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

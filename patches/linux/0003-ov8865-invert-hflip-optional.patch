@@ -1,0 +1,24 @@
+--- a/drivers/media/i2c/ov8865.c
++++ b/drivers/media/i2c/ov8865.c
+@@ -20,6 +20,11 @@
+ #include <media/v4l2-fwnode.h>
+ #include <media/v4l2-image-sizes.h>
+ #include <media/v4l2-mediabus.h>
++
++/* Local, opt-in correction for a horizontally mirrored sensor image. */
++static bool invert_hflip;
++module_param(invert_hflip, bool, 0444);
++MODULE_PARM_DESC(invert_hflip, "Invert the sensor horizontal-flip control");
+ 
+ /* Register definitions */
+ 
+@@ -2208,6 +2213,9 @@
+ 	u8 bits = OV8865_FORMAT2_FLIP_HORZ_ISP_EN |
+ 		  OV8865_FORMAT2_FLIP_HORZ_SENSOR_EN;
+ 
++	if (invert_hflip)
++		enable = !enable;
++
+ 	return ov8865_update_bits(sensor, OV8865_FORMAT2_REG, bits,
+ 				  enable ? bits : 0);
+ }
