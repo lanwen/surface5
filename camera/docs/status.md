@@ -32,3 +32,7 @@ Intel IPU3 firmware was present at `/usr/lib/firmware/intel/ipu3-fw.bin.zst`. Th
 The running installation was left untouched while publishing. Repository paths are relocatable; the installer uses `%h/.local/lib/surface5-camera` instead of a personal checkout path. Frame transport uses a private Unix stream socket instead of the prototype's FIFO: incomplete frames are discarded at connection boundaries so interrupted capture cannot misalign a later activation. Unit tests cover fragmented and interrupted frames plus staged install/rollback and conflict protection. The relocated/socket version has not yet undergone a fresh Firefox hardware test; the original FIFO version is the user-confirmed installation.
 
 The physical libcamera monitor is disabled in WirePlumber to prevent browsers negotiating broken sensor modes. This affects all physical libcamera cameras in that user session. The automatic virtual camera currently exposes **front only**, and only one capture pipeline can own it. This is a local workaround, not a claim that upstream drivers are fully fixed.
+
+## Stable checkout migration
+
+On 2026-09-11 the live services were migrated to `~/Work/lanwen/surface5` using the checkout drop-ins. The repository socket transport passed two real 60-frame V4L2 capture cycles with automatic activation and shutdown. Four framing/installer tests also passed. This extends the earlier prototype-only hardware validation; fresh Firefox visual confirmation after this migration is still user-side. See [automatic rebuild requirements](automatic-rebuilds.md).

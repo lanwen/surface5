@@ -23,7 +23,8 @@ def main():
         black = bytes([16, 128, 16, 128]) * (FRAME_SIZE // 4)
         if os.write(video, black) != FRAME_SIZE:
             raise RuntimeError('Incomplete initial frame write')
-        watch = subprocess.Popen([str(Path(__file__).with_name('watch'))])
+        watch_path = os.environ.get('SURFACE_CAMERA_WATCH', str(Path(__file__).with_name('watch')))
+        watch = subprocess.Popen([watch_path])
         while watch.poll() is None:
             if not select.select([server], [], [], 1)[0]:
                 continue

@@ -84,3 +84,22 @@ sudo python3 virtual-camera/install.py uninstall-system
 This stops/disables the project services, removes installed files or restores originals backed up during installation, reloads user units and restarts WirePlumber. Files edited after installation are protected: resolve the conflict before retrying. Backup manifests live in `~/.local/state/surface5-camera` and `/var/lib/surface5-camera`. Restoring an older unit does not automatically re-enable it; review it and enable deliberately if wanted.
 
 Packages and kernel modules remain installed. Reboot to apply the restored/removed boot configuration, or unload v4l2loopback only after all consumers have closed it. Kernel/libcamera patches have separate rollback procedures.
+
+## Run directly from the stable checkout
+
+For this machine, the checkout lives at `~/Work/lanwen/surface5`. With the base services and system configuration already installed, these drop-ins run Python directly from the checkout and the compiled watcher from its ignored `build/` directory:
+
+```bash
+cd ~/Work/lanwen/surface5/camera/virtual-camera
+make check
+systemctl --user stop surface-camera-demand surface-virtual-camera
+mkdir -p ~/.config/systemd/user/{surface-camera-demand,surface-virtual-camera}.service.d
+cp systemd/checkout/demand.conf ~/.config/systemd/user/surface-camera-demand.service.d/50-checkout.conf
+cp systemd/checkout/stream.conf ~/.config/systemd/user/surface-virtual-camera.service.d/50-checkout.conf
+systemctl --user daemon-reload
+systemctl --user start surface-camera-demand
+```
+
+Keep this checkout at that location. After updating its source, run `make check` and restart `surface-camera-demand` with viewers closed. This mode uses the checkout's code on subsequent service starts; review changes before pulling them into the live checkout. It does not automatically pull changes.
+
+To return to the previous base service paths, stop the demand and capture services, remove only the two `50-checkout.conf` files above, run `systemctl --user daemon-reload`, then start the demand service. The original prototype directory is retained for that rollback. Remove these drop-ins before using the general uninstall procedure.
