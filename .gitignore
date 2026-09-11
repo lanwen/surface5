@@ -13,3 +13,8 @@ camera/packaging/libcamera/build/
 *.log
 core
 core.*
+camera/packaging/surface5-camera-dkms/src/
+camera/packaging/surface5-camera-dkms/pkg/
+camera/packaging/surface5-camera-dkms/dw9719.c
+camera/packaging/surface5-camera-dkms/ov8865.c
+camera/packaging/surface5-camera-dkms/ov5693.c

@@ -44,4 +44,4 @@ Only if using patch 3, create `/etc/modprobe.d/ov8865-orientation.conf` with `op
 
 For the optional front experiment, install `ov5693.ko` to the same `updates/` directory before `depmod`. Prefer a clean reboot over hot-unloading this interdependent media graph.
 
-To roll back, restore your previous overrides, or remove only the overrides you installed, remove the optional orientation configuration, run `sudo depmod -a 6.19.8-arch1-3-surface`, then reboot. Never delete the packaged modules. Repeat validation after kernel updates; these overrides do not automatically rebuild through DKMS.
+To roll back, restore your previous overrides, or remove only the overrides you installed, remove the optional orientation configuration, run `sudo depmod -a 6.19.8-arch1-3-surface`, then reboot. Never delete the packaged modules. Repeat validation after kernel updates. These manual overrides do not automatically rebuild; use the [DKMS package](../../packaging/surface5-camera-dkms/README.md) for automatic rebuilding.

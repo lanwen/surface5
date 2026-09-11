@@ -15,3 +15,5 @@ Reproducible patches and an automatically activated virtual webcam for a Surface
 Start with the [status](docs/status.md), then the [virtual-camera instructions](virtual-camera/README.md) if native front capture at 1280×720 already works. Otherwise apply the relevant kernel/libcamera fixes first. Install only the changes your system needs; the experimental front patch is not a general fix for black frames.
 
 No prebuilt modules, packages, firmware, core dumps or machine logs are distributed. Nothing in this repository uploads or records camera frames. Source provenance and licensing are recorded with each component in [LICENSES.md](../LICENSES.md).
+
+[Automatic driver rebuilds with DKMS](packaging/surface5-camera-dkms/README.md) are available for the current patch set. Libcamera updates remain a separate reviewed rebuild.

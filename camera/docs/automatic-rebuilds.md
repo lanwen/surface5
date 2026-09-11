@@ -1,8 +1,10 @@
 # Requirements for automatic rebuilds
 
-The current kernel build helper targets only `6.19.8-arch1-3-surface`. It is not a DKMS package and must not be installed as an unrestricted update hook.
+The original kernel build helper targets only `6.19.8-arch1-3-surface`. It is not a DKMS package and must not be installed as an unrestricted update hook.
 
-A maintainable automatic setup requires:
+The installed [DKMS package](../packaging/surface5-camera-dkms/README.md) now implements target-kernel rebuilding for the existing patched sources. Version 6.19.8.1 was built and installed for 6.19.8-arch1-3-surface. It attempts future Surface kernels; their runtime compatibility is not yet established. Libcamera remains a separate manual workflow.
+
+Maintenance requirements:
 
 1. A versioned Arch DKMS source package for the patched `dw9719`, `ov8865` and (if retained) experimental `ov5693` modules. Install audited sources and `dkms.conf` into `/usr/src/<package>-<version>`; do not have privileged hooks build arbitrary changing checkout files or download source during an upgrade.
 2. A build that accepts DKMS's target kernel version and uses that kernel's matching headers, rather than `uname -r`. During an update the running kernel can still be the old one.

@@ -6,7 +6,7 @@ This repository contains multiple independently licensed components; no single l
 - `camera/packaging/libcamera/PKGBUILD`, `PKGBUILD.stock` and the existing Arch Python compatibility patch: retain Arch packaging provenance and the included `camera/packaging/libcamera/LICENSE` permission notice. The Python patch modifies upstream LGPL code and retains its own headers.
 - `camera/packaging/libcamera/ipu3-crop-underflow.patch` and `validation/*.cpp`: LGPL-2.1-or-later, as adaptations/extractions of libcamera's `src/libcamera/pipeline/ipu3/imgu.cpp`. Upstream authors retain their copyrights; see the v0.7.2 source. Validation scaffolding and local guard are distributed on those same terms.
 - `on-screen-keyboard/plugin/`: MIT, copyright (c) 2026 thesimonharms; original notice is retained in `on-screen-keyboard/plugin/LICENSE`. The upstream wvkbd source is fetched separately for builds and retains its own licensing.
-- Newly written virtual-camera code, installer, tests, build helper and documentation: MIT, below.
+- Newly written virtual-camera code, installer, tests, build helper, DKMS packaging recipe/configuration and documentation: MIT, below.
 
 ## MIT license for original repository material
 

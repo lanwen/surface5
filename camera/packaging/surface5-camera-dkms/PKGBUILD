@@ -1,0 +1,48 @@
+# Patched sources match the existing Surface Pro 5 installation.
+pkgname=surface5-camera-dkms
+pkgver=6.19.8.1
+pkgrel=1
+pkgdesc='Surface Pro 5 camera driver overrides with automatic Surface-kernel rebuilds'
+arch=('x86_64')
+url='https://github.com/lanwen/surface5'
+license=('GPL-2.0-only' 'GPL-2.0-or-later')
+depends=('dkms' 'linux-surface-headers')
+makedepends=('patch')
+source=(
+  'dw9719.c::https://raw.githubusercontent.com/linux-surface/kernel/0c2fbead4937c3f06bef64bd123998f72f57f370/drivers/media/i2c/dw9719.c'
+  'ov8865.c::https://raw.githubusercontent.com/archlinux/linux/v6.19.8-arch1/drivers/media/i2c/ov8865.c'
+  'ov5693.c::https://raw.githubusercontent.com/archlinux/linux/v6.19.8-arch1/drivers/media/i2c/ov5693.c'
+  'dkms.conf'
+  '0001-dw9719-i2c-id.patch'
+  '0002-ov8865-program-mode-and-balance-pm.patch'
+  '0003-ov8865-invert-hflip-optional.patch'
+  '0004-ov5693-reapply-mode-experimental.patch'
+)
+sha256sums=(
+  'fa503ac0f1f46475fa00db47163cfa8530ace5663312950db01fbd88a3f77c0a'
+  '7e0116eedd0d9498378970b8d8757d7d3d34ef566d8cb6a47db66f93a5b9ad8c'
+  'e4d5f9c4c148f1664bb1d4ae37c1095d9de42109907db71439f2f26f6519ea1c'
+  '3cf473038762218fe4f45153a45cd52fb28626246c9ec8395c50b581701704e4'
+  '49c4bb9578e861e9fba1cbbd1bc77ba2baa8f5578d8fe18b145beae2a5ec085f'
+  '26cdfbd1ae9cde5de1e07e0292fede2dc94f4d554b82a18b5933deae02a3ec05'
+  '98d580068a61163e486c2a054fd51b47843c9a94770cc26101da903278673056'
+  '29a384c71ba3d1eec6a51bf2e689e0bc650f358c5f5d4e6f3beb83cf2190c299'
+)
+prepare() {
+  mkdir -p drivers/media/i2c
+  cp dw9719.c ov8865.c ov5693.c drivers/media/i2c/
+  local patchfile
+  for patchfile in 0001-*.patch 0002-*.patch 0003-*.patch 0004-*.patch; do
+    patch --batch --fuzz=0 -p1 -i "$patchfile"
+  done
+  printf 'obj-m += dw9719.o ov8865.o ov5693.o\n' > drivers/media/i2c/Makefile
+}
+package() {
+  local dest="$pkgdir/usr/src/surface5-camera-$pkgver"
+  install -Dm644 dkms.conf "$dest/dkms.conf"
+  install -Dm644 drivers/media/i2c/Makefile "$dest/drivers/media/i2c/Makefile"
+  local module
+  for module in dw9719 ov8865 ov5693; do
+    install -m644 "drivers/media/i2c/$module.c" "$dest/drivers/media/i2c/"
+  done
+}

@@ -40,3 +40,18 @@ c++ -std=c++17 -O2 -D_GLIBCXX_ASSERTIONS validation/patched.cpp $(pkg-config --c
 ```
 
 For input1296×972/output832×480, patched output was IF1296×756 / BDS864×504 / GDC832×480, scale1.5. Original and patched agreed for outputs640×480 and1280×720. Boundary tests exercise heights536,540,544,972 and BDS factors. These are algorithm checks, not end-to-end camera validation.
+
+## Tracking when the local patch can be removed
+
+Checked on **2026-09-11**: official libcamera HEAD was [`87c7285663aaad7608fdc18d5216ec6811c685c7`](https://gitlab.freedesktop.org/camera/libcamera/-/commit/87c7285663aaad7608fdc18d5216ec6811c685c7). Its [`imgu.cpp`](https://gitlab.freedesktop.org/camera/libcamera/-/blob/87c7285663aaad7608fdc18d5216ec6811c685c7/src/libcamera/pipeline/ipu3/imgu.cpp) still contains `unsigned int minIFHeight = iif.height - ImgUDevice::kIFMaxCropHeight;` without the local guard. This was verified from the official Git repository, not inferred from a release number.
+
+No matching upstream submission was identified in the searches performed. The official [Patchwork underflow search](https://patchwork.libcamera.org/project/libcamera/list/?q=underflow&archive=both&state=*) returned no patches; the [ImgU patch history](https://patchwork.libcamera.org/project/libcamera/list/?q=imgu&archive=both&state=*) did not identify an equivalent new fix. These searches do not prove no differently named submission exists. There is currently **no verified PR/MR/patch ID to watch**, and this repository has not submitted one on the user's behalf. The OV8865 linux-surface PR documents a separate kernel-driver fix.
+
+To return to an unpatched distribution package:
+
+1. Identify the upstream commit that fixes this underflow or replaces the affected calculation safely.
+2. Confirm the exact Arch package's source includes that commit (or an equivalent backport); an open or merged submission alone is insufficient.
+3. Run the regression calculation for the original 832×480 failure and the documented boundary cases against that source, then test real 1280×720 capture and Firefox through the virtual camera.
+4. Install matching libcamera/IPA/tools/GStreamer packages together and remove the local package patch only after those checks pass.
+
+Fixing this crash alone does not establish that native low-resolution front capture works. The virtual camera may still be necessary.
