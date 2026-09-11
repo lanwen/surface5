@@ -1,0 +1,18 @@
+{
+  "description": "Exact tested local 0.7.2-4.1 build, checked against original package archives on 2026-09-11. A differing build needs review, not automatic rejection as vulnerable.",
+  "packages": {
+    "libcamera": "0.7.2-4.1",
+    "libcamera-ipa": "0.7.2-4.1",
+    "libcamera-tools": "0.7.2-4.1",
+    "gst-plugin-libcamera": "0.7.2-4.1"
+  },
+  "sha256": {
+    "/usr/lib/libcamera.so.0.7.2": "4d559d479c3b4f2641893f2410bed896a1b661d53320f96606e572468a5df73a",
+    "/usr/lib/libcamera-base.so.0.7.2": "14d97937e74b87ee5e27540f388d1e8548a79155d05e5cf8cee7e90de3d429cf",
+    "/usr/lib/libcamera/ipa/ipa_ipu3.so": "4a0b84ffb0c008f62efe694143750519813f0f0241a0b1d4a2f5b986ae8bce89",
+    "/usr/lib/libcamera/ipa/ipa_ipu3.so.sign": "2c991797a6a9cc0e5016d0d73aca1191186fb5909cab234f6103e585ff54715e",
+    "/usr/lib/libcamera/ipu3_ipa_proxy": "4362d795a31476673029cf4f7dc2b6f32c9313ff10a1b35a91029c551a81754a",
+    "/usr/bin/cam": "43e68b6f3698531dfa82cc1b7790cdd3e299603127dcc9c8543d30c65034d506",
+    "/usr/lib/gstreamer-1.0/libgstlibcamera.so": "a1a09546e83083415a74de88d06ad3c9c58ba1d01d3ed4ae9214be317a8f032e"
+  }
+}

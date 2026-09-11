@@ -55,3 +55,7 @@ To return to an unpatched distribution package:
 4. Install matching libcamera/IPA/tools/GStreamer packages together and remove the local package patch only after those checks pass.
 
 Fixing this crash alone does not establish that native low-resolution front capture works. The virtual camera may still be necessary.
+
+## Installed build check
+
+Run `./camera/doctor/libcamera-doctor.py` from the repository root after updates. It checks package consistency, relevant binary fingerprints and runtime loading; new builds require review even when 720p capture works. See the [doctor documentation](../../doctor/README.md).
